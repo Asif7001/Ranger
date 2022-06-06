@@ -11,6 +11,9 @@ RUN apt-get -qq install -y git python3 python3-pip \
 COPY requirements.txt .
 RUN pip3 install --no-cache-dir -r requirements.txt && \
     apt-get -qq purge git	
+    
+ENV TZ=Europe/Moscow
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 COPY . .
 
